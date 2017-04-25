@@ -10,7 +10,7 @@ public abstract class BaseRemoteDataSource {
 
     FOrderApi mFOrderApi;
 
-    public BaseRemoteDataSource(FOrderApi FOrderApi) {
-        mFOrderApi = FOrderApi;
+    public BaseRemoteDataSource(FOrderApi fOrderApi) {
+        mFOrderApi = fOrderApi;
     }
 }

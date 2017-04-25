@@ -1,6 +1,7 @@
 package com.framgia.forder.data.source.remote.api.error;
 
 import android.support.annotation.Nullable;
+import com.framgia.forder.data.source.remote.api.response.ErrorResponse;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -16,15 +17,22 @@ public final class BaseException extends RuntimeException {
     private final String type;
     @Nullable
     private Response response;
+    @Nullable
+    private ErrorResponse errorResponse;
 
-    private BaseException(@Type String type, Throwable cause) {
+    public BaseException(@Type String type, Throwable cause) {
         super(cause.getMessage(), cause);
         this.type = type;
     }
 
-    private BaseException(@Type String type, @Nullable Response response) {
+    public BaseException(@Type String type, @Nullable Response response) {
         this.type = type;
         this.response = response;
+    }
+
+    public BaseException(@Type String type, @Nullable ErrorResponse response) {
+        this.type = type;
+        this.errorResponse = response;
     }
 
     public static BaseException toNetworkError(Throwable cause) {
@@ -33,6 +41,10 @@ public final class BaseException extends RuntimeException {
 
     public static BaseException toHttpError(Response response) {
         return new BaseException(Type.HTTP, response);
+    }
+
+    public static BaseException toServerError(ErrorResponse response) {
+        return new BaseException(Type.SERVER, response);
     }
 
     public static BaseException toUnexpectedError(Throwable cause) {
@@ -47,8 +59,9 @@ public final class BaseException extends RuntimeException {
     public String getMessage() {
         switch (type) {
             case Type.SERVER:
-                // TODO define with server about ErrorResponse
-                //                if (errorResponse != null) return errorResponse.getErrorMessage();
+                if (errorResponse != null) {
+                    return errorResponse.getMessage();
+                }
                 return "";
             case Type.NETWORK:
                 return getNetworkErrorMessage(getCause());

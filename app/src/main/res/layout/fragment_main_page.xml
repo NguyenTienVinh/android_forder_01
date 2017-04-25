@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.framgia.forder.screen.mainpage.MainPageViewModel"
+            />
+        <variable
+            name="mainPage"
+            type="com.framgia.forder.screen.mainpage.MainPageFragment"
+            />
+        <import type="com.framgia.forder.R"/>
+        <import type="com.framgia.forder.utils.binding.LayoutManagers"/>
+        <import type="android.support.v7.widget.LinearLayoutManager"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_featured_shop"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/sp_15"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:onClick="@{() -> viewModel.onSeeMoreShopClick()}"
+                android:text="@string/action_see_more"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="@dimen/sp_15"
+                />
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="@{LayoutManagers.linear(LinearLayoutManager.HORIZONTAL)}"
+            app:recyclerAdapter="@{viewModel.shopAdapter}"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_featured_product"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/sp_15"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:onClick="@{() -> viewModel.onSeeMoreProductClick()}"
+                android:text="@string/action_see_more"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="@dimen/sp_15"
+                />
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="@{LayoutManagers.grid(mainPage.getResources.getInteger(R.integer.item_col))}"
+            app:recyclerAdapter="@{viewModel.productAdapter}"
+            />
+    </LinearLayout>
+</layout>

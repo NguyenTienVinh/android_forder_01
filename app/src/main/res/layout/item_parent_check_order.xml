@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_dark_slate_gray"
+        android:descendantFocusability="blocksDescendants"
+        android:padding="@dimen/dp_5"
+        >
+
+        <TextView
+            android:id="@+id/text_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/linear_layout"
+            android:layout_toRightOf="@+id/frame_status"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_15"
+            />
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/frame_status"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_15"
+                />
+
+            <TextView
+                android:id="@+id/text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/holo_red_light"
+                />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_status"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            >
+
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/color_blue"
+                android:gravity="center"
+                android:text="@string/pending"
+                android:textColor="@android:color/white"
+                />
+
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="@string/rejected"
+                android:textColor="@android:color/white"
+                />
+
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/accepted"
+                android:textColor="@android:color/white"
+                />
+        </FrameLayout>
+    </RelativeLayout>
+</layout>
+
