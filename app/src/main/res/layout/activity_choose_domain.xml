@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.framgia.forder.screen.chooseDomain.ChooseDomainViewModel"
+            />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_50"
+            android:gravity="center"
+            android:text="@string/welcome"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_30"
+            />
+        <ImageView
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_100"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_logo_forder"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_50"
+            android:text="@string/where_are_you"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/select_domain"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_17"
+            />
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            android:layout_width="@dimen/dp_300"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/border_spinner"
+            android:selectedItemPosition="@={viewModel.selectedTypePosition}"
+            android:spinnerMode="dropdown"
+            bind:spinnerAdapter="@{viewModel.adapter}"
+            />
+        <Button
+            android:layout_width="@dimen/dp_170"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_90"
+            android:background="@drawable/border_button_next"
+            android:onClick="@{viewModel::onClickNext}"
+            android:text="@string/next"
+            android:textColor="@color/color_orange"
+            />
+    </LinearLayout>
+</layout>

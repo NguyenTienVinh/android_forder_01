@@ -28,12 +28,12 @@ public class ServiceClient {
     }
 
     static <T> T createService(Application application, String endPoint, Class<T> serviceClass,
-            Gson gson) {
-        return createService(application, endPoint, serviceClass, gson, null);
+            Interceptor interceptor) {
+        return createService(application, endPoint, serviceClass, getGsonConfig(), interceptor);
     }
 
-    static <T> T createService(Application application, String endPoint, Class<T> serviceClass,
-            @NonNull Gson gson, Interceptor interceptor) {
+    private static <T> T createService(Application application, String endPoint,
+            Class<T> serviceClass, @NonNull Gson gson, Interceptor interceptor) {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         httpClientBuilder.cache(new Cache(application.getCacheDir(), cacheSize));
