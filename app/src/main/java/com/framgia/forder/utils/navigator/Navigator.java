@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.widget.Toast;
 import com.framgia.forder.R;
 
 /**
@@ -35,6 +37,7 @@ public class Navigator {
 
     public Navigator(Fragment fragment) {
         mFragment = fragment;
+        mActivity = fragment.getActivity();
     }
 
     public void startActivity(@NonNull Intent intent) {
@@ -43,6 +46,15 @@ public class Navigator {
 
     public void startActivity(@NonNull Class<? extends Activity> clazz) {
         mActivity.startActivity(new Intent(mActivity, clazz));
+    }
+
+    public void finishActivity() {
+        if (mActivity != null) {
+            mActivity.finish();
+        }
+        if (mFragment != null) {
+            mFragment.getActivity().finish();
+        }
     }
 
     public void startActivity(@NonNull Class<? extends Activity> clazz, Bundle args) {
@@ -88,13 +100,33 @@ public class Navigator {
      */
     public void goNextChildFragment(@IdRes int containerViewId, Fragment fragment,
             boolean addToBackStack, int animation, String tag) {
-        if (mFragment == null) return;
+        if (mFragment == null) {
+            return;
+        }
         FragmentTransaction transaction = mFragment.getChildFragmentManager().beginTransaction();
         setFragmentTransactionAnimation(transaction, animation);
-        if (addToBackStack) transaction.addToBackStack(fragment.getClass().getSimpleName());
+        if (addToBackStack) {
+            transaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
         transaction.replace(containerViewId, fragment, tag);
         transaction.commitAllowingStateLoss();
         mFragment.getChildFragmentManager().executePendingTransactions();
+    }
+
+    /**
+     * Always keep 1 fragment in container
+     *
+     * @return true if fragment stack has pop
+     */
+    public boolean goBackChildFragment() {
+        if (mFragment == null) {
+            return false;
+        }
+        boolean isShowPrevious = mFragment.getChildFragmentManager().getBackStackEntryCount() > 1;
+        if (isShowPrevious) {
+            mFragment.getChildFragmentManager().popBackStackImmediate();
+        }
+        return isShowPrevious;
     }
 
     private void setFragmentTransactionAnimation(FragmentTransaction transaction,
@@ -117,6 +149,18 @@ public class Navigator {
             default:
                 break;
         }
+    }
+
+    public void showToast(@StringRes int stringId) {
+        Toast.makeText(mActivity, mActivity.getString(stringId) + "", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToast(String message) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void goBackFragmentByTag(String tag, int flags) {
+        mFragment.getChildFragmentManager().popBackStackImmediate(tag, flags);
     }
 
     @IntDef({ RIGHT_LEFT, BOTTOM_UP, FADED, NONE, LEFT_RIGHT })
