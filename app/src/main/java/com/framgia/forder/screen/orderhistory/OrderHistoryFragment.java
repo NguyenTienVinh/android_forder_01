@@ -37,7 +37,8 @@ public class OrderHistoryFragment extends Fragment {
         OrderHistoryAdapter orderHistoryAdapter =
                 new OrderHistoryAdapter(getActivity(), orderHistories);
         Navigator navigator = new Navigator(getParentFragment());
-        mViewModel = new OrderHistoryViewModel(orderHistoryAdapter, navigator);
+        mViewModel = new OrderHistoryViewModel(orderHistoryAdapter, navigator,
+                getActivity().getWindow().getContext());
         OrderHistoryContract.Presenter presenter = new OrderHistoryPresenter(mViewModel);
         mViewModel.setPresenter(presenter);
         binding.setViewModel((OrderHistoryViewModel) mViewModel);

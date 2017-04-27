@@ -30,7 +30,7 @@
 
             <ImageView
                 android:layout_width="@dimen/dp_70"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_60"
                 />
 
             <TableLayout
@@ -89,6 +89,7 @@
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_20"
                             android:gravity="center"
+                            android:text="@string/pending"
                             android:textColor="@android:color/white"
                             />
 
@@ -97,6 +98,7 @@
                             android:layout_height="@dimen/dp_20"
                             android:background="@color/color_red"
                             android:gravity="center"
+                            android:text="@string/rejected"
                             android:textColor="@android:color/white"
                             />
 
@@ -105,6 +107,7 @@
                             android:layout_height="@dimen/dp_20"
                             android:background="@color/color_green"
                             android:gravity="center"
+                            android:text="@string/accepted"
                             android:textColor="@android:color/white"
                             />
 

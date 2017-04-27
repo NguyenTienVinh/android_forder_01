@@ -11,6 +11,8 @@
             type="com.framgia.forder.screen.orderhistory.OrderHistoryViewModel"
             />
 
+        <import type="android.view.View"/>
+
     </data>
 
     <LinearLayout
@@ -65,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:visibility="gone"
+                android:visibility="@{viewModel.hidden ? View.VISIBLE : View.GONE}"
                 >
 
                 <TableRow

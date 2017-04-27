@@ -65,4 +65,8 @@ public interface FOrderApi {
 
     @GET("order_managers")
     Observable<OrderManagementResponse> getOrderManagement();
+
+    @GET("v1/orders")
+    Observable<OrderResponse> getListOrder(@Query("user_id") int userId,
+            @Query("domain_id") int domainId);
 }

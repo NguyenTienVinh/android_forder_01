@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.framgia.forder.utils.Constant.FORMAT_DATE;
+
 /**
  * Created by Duong on 4/14/2017.
  */
@@ -45,6 +47,16 @@ public class Utils {
                 return parser.parse(date);
             } catch (java.text.ParseException e) {
                 return new Date();
+            }
+        }
+
+        public static String convertDateToString(Date date) {
+            SimpleDateFormat simpleDateFormat =
+                    new SimpleDateFormat(FORMAT_DATE, Locale.getDefault());
+            try {
+                return simpleDateFormat.format(date);
+            } catch (Exception e) {
+                return "";
             }
         }
     }

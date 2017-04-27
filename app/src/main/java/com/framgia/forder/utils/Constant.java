@@ -14,6 +14,8 @@ public final class Constant {
 
     public static final String FORMAT_TIME = "HH:mm";
 
+    public static final String FORMAT_DATE = "dd-MM-yyyy";
+
     public static final String UNIT_MONEY = " VNĐ";
 
     public static final int DEFAULT_QUANTITY = 1;
