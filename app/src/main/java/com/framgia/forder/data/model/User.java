@@ -2,149 +2,77 @@ package com.framgia.forder.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.framgia.forder.utils.Utils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import io.realm.RealmModel;
-import io.realm.annotations.PrimaryKey;
 
 /**
- * Created by le.quang.dao on 10/03/2017.
+ * Created by levutantuan on 4/17/17.
  */
 
-public class User extends BaseModel implements Parcelable, RealmModel {
-
-    @SerializedName("login")
-    @Expose
-    @PrimaryKey
-    private String login;
+public class User implements Parcelable {
     @SerializedName("id")
     @Expose
-    private Integer id;
-    @SerializedName("avatar_url")
-    @Expose
-    private String avatarUrl;
-    @SerializedName("gravatar_id")
-    @Expose
-    private String gravatarId;
-    @SerializedName("url")
-    @Expose
-    private String url;
-    @SerializedName("html_url")
-    @Expose
-    private String htmlUrl;
-    @SerializedName("followers_url")
-    @Expose
-    private String followersUrl;
-    @SerializedName("following_url")
-    @Expose
-    private String followingUrl;
-    @SerializedName("gists_url")
-    @Expose
-    private String gistsUrl;
-    @SerializedName("starred_url")
-    @Expose
-    private String starredUrl;
-    @SerializedName("subscriptions_url")
-    @Expose
-    private String subscriptionsUrl;
-    @SerializedName("organizations_url")
-    @Expose
-    private String organizationsUrl;
-    @SerializedName("repos_url")
-    @Expose
-    private String reposUrl;
-    @SerializedName("events_url")
-    @Expose
-    private String eventsUrl;
-    @SerializedName("received_events_url")
-    @Expose
-    private String receivedEventsUrl;
-    @SerializedName("type")
-    @Expose
-    private String type;
-    @SerializedName("site_admin")
-    @Expose
-    private Boolean siteAdmin;
+    private Integer mId;
     @SerializedName("name")
     @Expose
-    private String name;
-    @SerializedName("company")
-    @Expose
-    private String company;
-    @SerializedName("blog")
-    @Expose
-    private String blog;
-    @SerializedName("location")
-    @Expose
-    private String location;
+    private String mName;
     @SerializedName("email")
     @Expose
-    private String email;
-    @SerializedName("hireable")
+    private String mEmail;
+    @SerializedName("avatar")
     @Expose
-    private String hireable;
-    @SerializedName("bio")
+    private CollectionAvatar mAvatar;
+    @SerializedName("authentication_token")
     @Expose
-    private String bio;
-    @SerializedName("public_repos")
-    @Expose
-    private Integer publicRepos;
-    @SerializedName("public_gists")
-    @Expose
-    private Integer publicGists;
-    @SerializedName("followers")
-    @Expose
-    private Integer followers;
-    @SerializedName("following")
-    @Expose
-    private Integer following;
+    private String mToken;
     @SerializedName("created_at")
     @Expose
-    private String createdAt;
+    private String mCreatedAt;
     @SerializedName("updated_at")
     @Expose
-    private String updatedAt;
+    private String mUpdatedAt;
 
-    public User() {
-    }
+    @SerializedName("chatwork_id")
+    @Expose
+    private String mChatworkId;
 
-    public User(final String userLogin, final String name, final String avatarUrl,
-            final String bio) {
-        this.login = userLogin;
-        this.name = name;
-        this.avatarUrl = avatarUrl;
-        this.bio = bio;
-    }
-
-    public User(final String userLogin) {
-        this.login = userLogin;
-    }
+    @SerializedName("description")
+    @Expose
+    private String mDescription;
 
     protected User(Parcel in) {
-        login = in.readString();
-        avatarUrl = in.readString();
-        gravatarId = in.readString();
-        url = in.readString();
-        htmlUrl = in.readString();
-        followersUrl = in.readString();
-        followingUrl = in.readString();
-        gistsUrl = in.readString();
-        starredUrl = in.readString();
-        subscriptionsUrl = in.readString();
-        organizationsUrl = in.readString();
-        reposUrl = in.readString();
-        eventsUrl = in.readString();
-        receivedEventsUrl = in.readString();
-        type = in.readString();
-        name = in.readString();
-        company = in.readString();
-        blog = in.readString();
-        location = in.readString();
-        email = in.readString();
-        hireable = in.readString();
-        bio = in.readString();
-        createdAt = in.readString();
-        updatedAt = in.readString();
+        mName = in.readString();
+        mEmail = in.readString();
+        mAvatar = in.readParcelable(Image.class.getClassLoader());
+        mToken = in.readString();
+        mCreatedAt = in.readString();
+        mUpdatedAt = in.readString();
+        mChatworkId = in.readString();
+        mDescription = in.readString();
+    }
+
+    public User(Integer id, String name, String email) {
+        mId = id;
+        mName = name;
+        mEmail = email;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        dest.writeString(mEmail);
+        dest.writeParcelable(mAvatar, flags);
+        dest.writeString(mToken);
+        dest.writeString(mCreatedAt);
+        dest.writeString(mUpdatedAt);
+        dest.writeString(mChatworkId);
+        dest.writeString(mDescription);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -159,174 +87,80 @@ public class User extends BaseModel implements Parcelable, RealmModel {
         }
     };
 
-    /**
-     * @return The login
-     */
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    /**
-     * @return The id
-     */
     public Integer getId() {
-        return id;
+        return mId;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
-    public String getGravatarId() {
-        return gravatarId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getHtmlUrl() {
-        return htmlUrl;
-    }
-
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public String getStarredUrl() {
-        return starredUrl;
-    }
-
-    public String getSubscriptionsUrl() {
-        return subscriptionsUrl;
-    }
-
-    public void setSubscriptionsUrl(String subscriptionsUrl) {
-        this.subscriptionsUrl = subscriptionsUrl;
-    }
-
-    public String getOrganizationsUrl() {
-        return organizationsUrl;
-    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public String getEventsUrl() {
-        return eventsUrl;
-    }
-
-    public String getReceivedEventsUrl() {
-        return receivedEventsUrl;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Boolean getSiteAdmin() {
-        return siteAdmin;
+    public void setId(Integer id) {
+        mId = id;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
-    public Object getCompany() {
-        return company;
+    public void setName(String name) {
+        mName = name;
     }
 
-    public String getBlog() {
-        return blog;
+    public String getEmail() {
+        return mEmail;
     }
 
-    public String getLocation() {
-        return location;
+    public void setEmail(String email) {
+        mEmail = email;
     }
 
-    public Object getEmail() {
-        return email;
+    public CollectionAvatar getAvatar() {
+        return mAvatar;
     }
 
-    public Object getHireable() {
-        return hireable;
+    public void setAvatar(CollectionAvatar avatar) {
+        mAvatar = avatar;
     }
 
-    public String getBio() {
-        return bio;
+    public String getToken() {
+        return mToken;
     }
 
-    public Integer getPublicRepos() {
-        return publicRepos;
-    }
-
-    public Integer getPublicGists() {
-        return publicGists;
-    }
-
-    public Integer getFollowers() {
-        return followers;
-    }
-
-    public Integer getFollowing() {
-        return following;
+    public void setToken(String token) {
+        mToken = token;
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        return mCreatedAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        mCreatedAt = createdAt;
     }
 
     public String getUpdatedAt() {
-        return updatedAt;
+        return mUpdatedAt;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setUpdatedAt(String updatedAt) {
+        mUpdatedAt = updatedAt;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(login);
-        dest.writeString(avatarUrl);
-        dest.writeString(gravatarId);
-        dest.writeString(url);
-        dest.writeString(htmlUrl);
-        dest.writeString(followersUrl);
-        dest.writeString(followingUrl);
-        dest.writeString(gistsUrl);
-        dest.writeString(starredUrl);
-        dest.writeString(subscriptionsUrl);
-        dest.writeString(organizationsUrl);
-        dest.writeString(reposUrl);
-        dest.writeString(eventsUrl);
-        dest.writeString(receivedEventsUrl);
-        dest.writeString(type);
-        dest.writeString(name);
-        dest.writeString(company);
-        dest.writeString(blog);
-        dest.writeString(location);
-        dest.writeString(email);
-        dest.writeString(hireable);
-        dest.writeString(bio);
-        dest.writeString(createdAt);
-        dest.writeString(updatedAt);
+    public String getChatworkId() {
+        return mChatworkId;
+    }
+
+    public void setChatworkId(String chatworkId) {
+        mChatworkId = chatworkId;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public String getFormatDate() {
+        return Utils.DateTimeUntils.convertUiFormatToDataFormat(mCreatedAt, Utils.INPUT_TIME_FORMAT,
+                Utils.OUTPUT_DATE_FORMAT);
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.framgia.forder.screen.orderhistory.ItemHeaderOrderHistoryViewModel"
+            />
+
+        <import type="android.view.View"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_yellow_mos"
+        android:descendantFocusability="blocksDescendants"
+        android:padding="@dimen/dp_10"
+        >
+
+        <FrameLayout
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_24"
+            >
+
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/color_blue"
+                android:gravity="center"
+                android:text="@string/pending"
+                android:textColor="@android:color/white"
+                android:visibility="@{viewModel.pendingStatus ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="@string/rejected"
+                android:textColor="@android:color/white"
+                android:visibility="@{viewModel.rejectStatus ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/accepted"
+                android:textColor="@android:color/white"
+                android:visibility="@{viewModel.acceptStatus ? View.VISIBLE : View.GONE}"
+                />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/sp_15"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="@string/title_total"
+            android:textColor="@android:color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:gravity="right"
+            android:textColor="@android:color/holo_red_light"
+            />
+
+    </LinearLayout>
+</layout>
