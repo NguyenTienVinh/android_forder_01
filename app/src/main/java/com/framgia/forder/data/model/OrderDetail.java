@@ -21,6 +21,9 @@ public class OrderDetail {
     private int mStatus;
     private boolean mCheckBoxStatus;
 
+    public OrderDetail() {
+    }
+
     public int getId() {
         return mId;
     }

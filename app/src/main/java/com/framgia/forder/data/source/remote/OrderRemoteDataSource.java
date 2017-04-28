@@ -3,6 +3,7 @@ package com.framgia.forder.data.source.remote;
 import com.framgia.forder.data.model.Order;
 import com.framgia.forder.data.source.OrderDataSource;
 import com.framgia.forder.data.source.remote.api.response.OrderManagementResponse;
+import com.framgia.forder.data.source.remote.api.response.OrderResponse;
 import com.framgia.forder.data.source.remote.api.service.FOrderApi;
 import java.util.List;
 import rx.Observable;
@@ -28,6 +29,21 @@ public class OrderRemoteDataSource extends BaseRemoteDataSource
                             OrderManagementResponse orderManagementResponse) {
                         if (orderManagementResponse != null) {
                             return Observable.just(orderManagementResponse.getOrders());
+                        }
+                        return Observable.error(new NullPointerException());
+                    }
+                });
+    }
+
+    @Override
+    public Observable<List<Order>> getOrderHistory(int userId, int domainId) {
+        return mFOrderApi.getListOrder(userId, domainId)
+                .flatMap(new Func1<OrderResponse, Observable<List<Order>>>() {
+
+                    @Override
+                    public Observable<List<Order>> call(OrderResponse orderResponse) {
+                        if (orderResponse != null) {
+                            return Observable.just(orderResponse.getOrders());
                         }
                         return Observable.error(new NullPointerException());
                     }
