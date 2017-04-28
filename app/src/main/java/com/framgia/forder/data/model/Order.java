@@ -30,6 +30,19 @@ public class Order {
     @SerializedName("order_detail")
     private List<OrderDetail> mOrderDetails;
 
+    public Order() {
+    }
+
+    public Order(int id, int status, String endDate, double totalPay, Shop shop,
+            List<OrderDetail> orderDetails) {
+        mId = id;
+        mStatus = status;
+        mEndDate = endDate;
+        mTotalPay = totalPay;
+        mShop = shop;
+        mOrderDetails = orderDetails;
+    }
+
     public int getId() {
         return mId;
     }

@@ -35,4 +35,8 @@ public class DomainRepository {
     public Domain getCurrentDomain() {
         return mLocalDataSource.getCurrentDomain();
     }
+
+    public User getUser() {
+        return mLocalDataSource.getUser();
+    }
 }

@@ -11,5 +11,6 @@ import rx.Observable;
 public interface OrderDataSource {
     interface RemoteDataSource {
         Observable<List<Order>> getOrderManagement();
+        Observable<List<Order>> getOrderHistory(int userId, int domainId);
     }
 }
